@@ -4,9 +4,9 @@
     <string name="app_name">Pizza Ordering</string>
     <string name="action_settings">Settings</string>
     <string name="pizza_size">Pizza Size</string>
-    <string name="small_price">Small $8</string>
-    <string name="medium_size">Medium $10</string>
-    <string name="large_size">Large $12</string>
+    <string name="small_size">Small \n$8</string>
+    <string name="medium_size">Medium \n$10</string>
+    <string name="large_size">Large \n$12</string>
     <string name="toppings">Toppings</string>
     <string name="topping_cheese">Cheese</string>
     <string name="topping_bacon">Bacon</string>

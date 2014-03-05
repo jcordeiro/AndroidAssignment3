@@ -6,45 +6,71 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context=".MainActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="@string/pizza_size" />
 
-    
-    
-    
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pizza_size"
+            android:textSize="20sp" />
+
+        <RadioGroup
+            android:id="@+id/grpSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:orientation="horizontal" >
+            <RadioButton
+                android:id="@+id/radSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/small_size" />
+
+            <RadioButton
+                android:id="@+id/radMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/medium_size" />
+
+            <RadioButton
+                android:id="@+id/radLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/large_size" />
+        </RadioGroup>
+
+
     <CheckBox
         android:id="@+id/chkCheese"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/topping_cheese" />
- 
+
     <CheckBox
         android:id="@+id/chkPeperoni"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/topping_pepperoni" />
-    
+
     <CheckBox
         android:id="@+id/chkSausage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/topping_sausage" />
-    
+
     <CheckBox
         android:id="@+id/chkBacon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/topping_bacon" />
-    
+
     <CheckBox
         android:id="@+id/chkPepper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/topping_green_pepper" />
-    
+
 </LinearLayout>
