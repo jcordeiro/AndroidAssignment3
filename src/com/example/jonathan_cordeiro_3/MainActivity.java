@@ -6,10 +6,16 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+
+// TODO: Add pizza class
+// TODO: Solve problem with topping prices
+// TODO: Put pizza object in intent
+// TODO: Finish activity_payment layout
+// TODO: Add onActivityReturned callback
+
 
 public class MainActivity extends Activity implements OnCheckedChangeListener {
 
@@ -25,8 +31,6 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 
 		RadioGroup grpSize = (RadioGroup) findViewById(R.id.grpSize);
 		grpSize.setOnCheckedChangeListener(this);
-
-
 	}
 
 	@Override
@@ -36,16 +40,13 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 		return true;
 	}
 
+	// Runs when the user clicks the payment button
 	public void onPayment(View view) {
-		
-		
 		Intent intent = new Intent(MainActivity.this, PaymentActivity.class);
-		
-//		intent.putExtra("firstName", firstName);
-		
+
+		// TODO: Put extras in Intent
+
 		startActivityForResult(intent, PAYMENT_ACTIVITY);
-
-
 	}
 
 	// Updates the price of the pizza toppings based on currently selected pizza size
