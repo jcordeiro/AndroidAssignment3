@@ -2,75 +2,104 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
     tools:context=".MainActivity" >
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pizza_size"
+        android:textSize="20sp" />
 
+    <RadioGroup
+        android:id="@+id/grpSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
-        <TextView
+        <RadioButton
+            android:id="@+id/radSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pizza_size"
-            android:textSize="20sp" />
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="@string/small_size" />
 
-        <RadioGroup
-            android:id="@+id/grpSize"
+        <RadioButton
+            android:id="@+id/radMedium"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-            android:orientation="horizontal" >
-            <RadioButton
-                android:id="@+id/radSmall"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/medium_size" />
+
+        <RadioButton
+            android:id="@+id/radLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/large_size" />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/toppings"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:baselineAligned="false" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <CheckBox
+                android:id="@+id/chkCheese"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/small_size" />
+                android:text="@string/topping_cheese" />
 
-            <RadioButton
-                android:id="@+id/radMedium"
+            <CheckBox
+                android:id="@+id/chkPeperoni"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/medium_size" />
+                android:text="@string/topping_pepperoni" />
 
-            <RadioButton
-                android:id="@+id/radLarge"
+            <CheckBox
+                android:id="@+id/chkSausage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/large_size" />
-        </RadioGroup>
+                android:text="@string/topping_sausage" />
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical" >
 
-    <CheckBox
-        android:id="@+id/chkCheese"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/topping_cheese" />
+            <CheckBox
+                android:id="@+id/chkBacon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/topping_bacon" />
 
-    <CheckBox
-        android:id="@+id/chkPeperoni"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/topping_pepperoni" />
-
-    <CheckBox
-        android:id="@+id/chkSausage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/topping_sausage" />
-
-    <CheckBox
-        android:id="@+id/chkBacon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/topping_bacon" />
-
-    <CheckBox
-        android:id="@+id/chkPepper"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/topping_green_pepper" />
+            <CheckBox
+                android:id="@+id/chkPepper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/topping_green_pepper" />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
