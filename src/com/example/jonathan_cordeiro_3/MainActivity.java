@@ -3,6 +3,7 @@ package com.example.jonathan_cordeiro_3;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.View;
 
 public class MainActivity extends Activity {
 
@@ -19,4 +20,9 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	public void onPayment(View view) {
+		
+		
+	}
+	
 }
