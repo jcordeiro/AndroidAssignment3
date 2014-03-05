@@ -2,14 +2,18 @@ package com.example.jonathan_cordeiro_3;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 public class MainActivity extends Activity implements OnCheckedChangeListener {
+
+	private static final int PAYMENT_ACTIVITY = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,13 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 	}
 
 	public void onPayment(View view) {
+		
+		
+		Intent intent = new Intent(MainActivity.this, PaymentActivity.class);
+		
+//		intent.putExtra("firstName", firstName);
+		
+		startActivityForResult(intent, PAYMENT_ACTIVITY);
 
 
 	}

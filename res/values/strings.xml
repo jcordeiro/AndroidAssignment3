@@ -14,11 +14,10 @@
     <string name="topping_sausage">Sausage $</string>
     <string name="topping_green_pepper">Green Pepper $</string>
     <string name="payment">Payment</string>
-    <string name="payment_information">Payment Infromation</string>
     <string name="payment_accepted">Payment accepted</string>
     <string name="payment_not_accepted">Payment not accepted!</string>
-    <string name="title_activity_payment">PaymentActivity</string>
+    <string name="title_activity_payment">Payment Information</string>
     <string name="hello_world">Hello world!</string>
     <string name="pay_now">Pay now!</string>
 
-    <resources></resources>
+</resources>
