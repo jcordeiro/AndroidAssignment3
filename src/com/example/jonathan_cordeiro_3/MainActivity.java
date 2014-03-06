@@ -23,6 +23,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 public class MainActivity extends Activity implements OnCheckedChangeListener {
 
 	private static final int PAYMENT_ACTIVITY = 0;
+	private static final double HST = 1.13;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,16 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 	}
 
 	// Runs when the user clicks the payment button
+	// creates a pizza objects and passes it to the payment activity
 	public void onPayment(View view) {
+
+
+		double pizzaPrice = 0;
+		ArrayList<String> pizzaToppings = getPizzaToppings();
+		Size pizzaSize = getPizzaSize();
+
+		Pizza pizza = new Pizza(pizzaPrice, pizzaToppings, pizzaSize);
+
 		Intent intent = new Intent(MainActivity.this, PaymentActivity.class);
 
 		// TODO: Put extras in Intent
@@ -73,7 +83,7 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 
 	// Gets the toppings currently selected
 	public ArrayList<String> getPizzaToppings() {
-		
+
 		// An ArrayList to store all the toppings
 		ArrayList<String> pizzaToppings = new ArrayList<String>();
 
@@ -105,7 +115,79 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 
 	}
 
-	// Updates the price of the pizza toppings based on currently selected pizza size
+	// Get the price of all the toppings currently on the pizza
+	public double getToppingPrice(Size size, ArrayList<String> toppings) {
+
+		double toppingPrice = 0;
+
+		// The base price for the toppings
+		double cheesePrice = 1;
+		double pepperoniPrice = 1.5;
+		double sausagePrice = 1.75;
+		double baconPrice = 1.25;
+		double greenPepperPrice = 1;
+
+		// If pizza is medium or large, we increase price of toppings
+		// If pizza is small, we use the base prices
+		if (size == Size.MEDIUM) {
+			cheesePrice += 0.25;
+			pepperoniPrice += 0.25;
+			sausagePrice += 0.25;
+			baconPrice += 0.25;
+			greenPepperPrice += 0.25;
+		}
+		else if (size == Size.LARGE) {
+			cheesePrice += 0.5;
+			pepperoniPrice += 0.5;
+			sausagePrice += 0.5;
+			baconPrice += 0.5;
+			greenPepperPrice += 0.5;
+		}
+
+		// Check which toppings are on the pizza an incremement the price
+		if (toppings.contains("Cheese")) {
+			toppingPrice = toppingPrice + cheesePrice;
+		}
+		else if (toppings.contains("Pepperoni")) {
+			toppingPrice = toppingPrice + pepperoniPrice;
+		}
+		else if (toppings.contains("Sausage")) {
+			toppingPrice = toppingPrice + sausagePrice;
+		}
+		else if (toppings.contains("Bacon")) {
+			toppingPrice = toppingPrice + baconPrice;
+		}
+		else if (toppings.contains("Green Pepper")) {
+			toppingPrice = toppingPrice + greenPepperPrice;
+		}
+
+		return toppingPrice;
+
+	}
+
+	// Calculates the total price of the pizza
+	public double calculateTotalPizzaPrice(Size size, double toppingPrice) {
+
+		double price;
+
+		if (size == Size.SMALL) {
+			price = 10;
+		}
+		else if (size == Size.MEDIUM) {
+			price = 12;
+		}
+		else {
+			// LARGE
+			price = 14;
+		}
+
+		price = price + toppingPrice;
+		price = price * HST;
+		return price;
+
+	}
+
+	// Updates the prices displayed for the pizza toppings based on currently selected pizza size
 	public void updateToppingPrices() {
 		// The base price for the toppings
 		double cheesePrice = 1;
