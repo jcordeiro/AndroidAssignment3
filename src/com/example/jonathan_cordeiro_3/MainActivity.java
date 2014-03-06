@@ -49,9 +49,11 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 	public void onPayment(View view) {
 
 
-		double pizzaPrice = 0;
+		
 		ArrayList<String> pizzaToppings = getPizzaToppings();
 		Size pizzaSize = getPizzaSize();
+		double toppingPrice = getToppingPrice(pizzaSize, pizzaToppings);
+		double pizzaPrice = calculateTotalPizzaPrice(pizzaSize, toppingPrice);
 
 		Pizza pizza = new Pizza(pizzaPrice, pizzaToppings, pizzaSize);
 

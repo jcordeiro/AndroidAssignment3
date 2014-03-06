@@ -2,18 +2,21 @@ package com.example.jonathan_cordeiro_3;
 
 import java.util.ArrayList;
 
-public class Pizza {
-	
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Pizza implements Parcelable {
+
 	private double price;
 	private ArrayList<String> toppings;
 	private Size size;
-	
+
 	public enum Size {
 		SMALL,
 		MEDIUM,
 		LARGE
 	}
-	
+
 	// Constructor
 	public Pizza(double price, ArrayList<String> toppings, Size size) {
 		this.price = price;
@@ -45,6 +48,25 @@ public class Pizza {
 	public void setSize(Size size) {
 		this.size = size;
 	}
-	
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	// Writes data to parcel
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeDouble(price);
+		dest.writeSerializable(toppings);
+		dest.writeSerializable(size);
+	}
+
+	// Constructor that reads values from a Parcel
+	public Pizza(Parcel in){
+		this.price = in.readDouble();
+		this.toppings = (ArrayList<String>) in.readSerializable();
+		this.size = (Size) in.readSerializable();
+	}
 
 }
