@@ -8,11 +8,11 @@
     <string name="medium_size">Medium \n$10</string>
     <string name="large_size">Large \n$12</string>
     <string name="toppings">Toppings</string>
-    <string name="topping_cheese">Cheese $</string>
-    <string name="topping_bacon">Bacon $</string>
-    <string name="topping_pepperoni">Pepperoni $</string>
-    <string name="topping_sausage">Sausage $</string>
-    <string name="topping_green_pepper">Green Pepper $</string>
+    <string name="topping_cheese">Cheese</string>
+    <string name="topping_bacon">Bacon</string>
+    <string name="topping_pepperoni">Pepperoni</string>
+    <string name="topping_sausage">Sausage</string>
+    <string name="topping_green_pepper">Green Pepper</string>
     <string name="payment">Payment</string>
     <string name="payment_accepted">Payment accepted</string>
     <string name="payment_not_accepted">Payment not accepted!</string>

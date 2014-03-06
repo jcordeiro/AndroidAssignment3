@@ -1,5 +1,7 @@
 package com.example.jonathan_cordeiro_3;
 
+import java.util.ArrayList;
+
 import com.example.jonathan_cordeiro_3.Pizza.Size;
 
 import android.os.Bundle;
@@ -69,6 +71,40 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 
 	}
 
+	// Gets the toppings currently selected
+	public ArrayList<String> getPizzaToppings() {
+		
+		// An ArrayList to store all the toppings
+		ArrayList<String> pizzaToppings = new ArrayList<String>();
+
+		// Get references to the checkbox widgets
+		CheckBox chkCheese = (CheckBox)findViewById(R.id.chkCheese);
+		CheckBox chkPepperoni = (CheckBox)findViewById(R.id.chkPeperoni);
+		CheckBox chkBacon = (CheckBox)findViewById(R.id.chkBacon);
+		CheckBox chkSausage = (CheckBox)findViewById(R.id.chkSausage);
+		CheckBox chkPepper = (CheckBox)findViewById(R.id.chkPepper);
+
+		// Store all the checkboxes in an ArrayList so we can iterate over them
+		ArrayList<CheckBox> checkboxes = new ArrayList<CheckBox>();
+		checkboxes.add(chkCheese);
+		checkboxes.add(chkPepperoni);
+		checkboxes.add(chkBacon);
+		checkboxes.add(chkSausage);
+		checkboxes.add(chkPepper);
+
+		// Iterate through the checkboxes and if they're checked
+		// add that topping to the ArrayList of toppings
+		for (CheckBox cb : checkboxes) {
+			if (cb.isChecked()) {
+				pizzaToppings.add(cb.getText().toString());
+			}
+		}
+
+		return pizzaToppings;
+
+
+	}
+
 	// Updates the price of the pizza toppings based on currently selected pizza size
 	public void updateToppingPrices() {
 		// The base price for the toppings
@@ -77,10 +113,10 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 		double sausagePrice = 1.75;
 		double baconPrice = 1.25;
 		double greenPepperPrice = 1;
-		
+
 		// Get the size of the pizza
 		Size pizzaSize = getPizzaSize();
-		
+
 		// If pizza is medium or large, we increase price of toppings
 		// If pizza is small, we use the base price
 		if (pizzaSize == Size.MEDIUM) {
@@ -108,15 +144,15 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 		// Display the appropriate price for the toppings
 		//				chkCheese.setText(String.format("%s%.2f", chkCheese.getText().toString(), cheesePrice));
 
-		chkCheese.setText(String.format("%s%.2f",
+		chkCheese.setText(String.format("%s $%.2f",
 				getResources().getText(R.string.topping_cheese), cheesePrice));
-		chkPepperoni.setText(String.format("%s%.2f",
+		chkPepperoni.setText(String.format("%s $%.2f",
 				getResources().getText(R.string.topping_pepperoni), pepperoniPrice));
-		chkBacon.setText(String.format("%s%.2f",
+		chkBacon.setText(String.format("%s $%.2f",
 				getResources().getText(R.string.topping_bacon), baconPrice));
-		chkSausage.setText(String.format("%s%.2f",
+		chkSausage.setText(String.format("%s $%.2f",
 				getResources().getText(R.string.topping_sausage), sausagePrice));
-		chkPepper.setText(String.format("%s%.2f",
+		chkPepper.setText(String.format("%s $%.2f",
 				getResources().getText(R.string.topping_green_pepper), greenPepperPrice));
 	}
 
