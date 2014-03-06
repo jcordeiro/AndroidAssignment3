@@ -63,6 +63,7 @@ public class Pizza implements Parcelable {
 	}
 
 	// Constructor that reads values from a Parcel
+	@SuppressWarnings("unchecked")
 	public Pizza(Parcel in){
 		this.price = in.readDouble();
 		this.toppings = (ArrayList<String>) in.readSerializable();

@@ -19,5 +19,9 @@
     <string name="title_activity_payment">Payment Information</string>
     <string name="hello_world">Hello world!</string>
     <string name="pay_now">Pay now!</string>
+    <string name="total_price">Total Price with HST: $</string>
+    <string name="pizza_with">pizza with...</string>
+    <string name="credit_card">Credit Card</string>
+    <string name="cash">Cash</string>
 
 </resources>

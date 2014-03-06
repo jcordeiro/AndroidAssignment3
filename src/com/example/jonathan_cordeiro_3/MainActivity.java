@@ -14,8 +14,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
-// TODO: Solve problem with topping prices
-// TODO: Put pizza object in intent
 // TODO: Finish activity_payment layout
 // TODO: Add onActivityResult callback
 
@@ -30,9 +28,9 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-
 		updateToppingPrices();
 
+		// Set the listener on the radio buttons
 		RadioGroup grpSize = (RadioGroup) findViewById(R.id.grpSize);
 		grpSize.setOnCheckedChangeListener(this);
 	}
@@ -47,20 +45,16 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 	// Runs when the user clicks the payment button
 	// creates a pizza objects and passes it to the payment activity
 	public void onPayment(View view) {
-
-
-		
 		ArrayList<String> pizzaToppings = getPizzaToppings();
 		Size pizzaSize = getPizzaSize();
 		double toppingPrice = getToppingPrice(pizzaSize, pizzaToppings);
 		double pizzaPrice = calculateTotalPizzaPrice(pizzaSize, toppingPrice);
 
 		Pizza pizza = new Pizza(pizzaPrice, pizzaToppings, pizzaSize);
-
 		Intent intent = new Intent(MainActivity.this, PaymentActivity.class);
+		intent.putExtra("pizza", pizza);
 
-		// TODO: Put extras in Intent
-
+		// Start the payment activity
 		startActivityForResult(intent, PAYMENT_ACTIVITY);
 	}
 
@@ -173,14 +167,14 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 		double price;
 
 		if (size == Size.SMALL) {
-			price = 10;
+			price = 8;
 		}
 		else if (size == Size.MEDIUM) {
-			price = 12;
+			price = 10;
 		}
 		else {
 			// LARGE
-			price = 14;
+			price = 12;
 		}
 
 		price = price + toppingPrice;
