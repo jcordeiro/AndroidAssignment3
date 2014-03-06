@@ -70,4 +70,15 @@ public class Pizza implements Parcelable {
 		this.size = (Size) in.readSerializable();
 	}
 
+	public static final Parcelable.Creator<Pizza> CREATOR = new
+			Parcelable.Creator<Pizza>() {
+		public Pizza createFromParcel(Parcel in) {
+			return new Pizza(in);
+		}
+
+		public Pizza[] newArray(int size) {
+			return new Pizza[size];
+		}
+	};
+
 }
