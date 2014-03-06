@@ -1,5 +1,7 @@
 package com.example.jonathan_cordeiro_3;
 
+import com.example.jonathan_cordeiro_3.Pizza.Size;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -10,11 +12,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
-// TODO: Add pizza class
 // TODO: Solve problem with topping prices
 // TODO: Put pizza object in intent
 // TODO: Finish activity_payment layout
-// TODO: Add onActivityReturned callback
+// TODO: Add onActivityResult callback
 
 
 public class MainActivity extends Activity implements OnCheckedChangeListener {
@@ -49,6 +50,25 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 		startActivityForResult(intent, PAYMENT_ACTIVITY);
 	}
 
+	// Gets the currently selected pizza size
+	public Size getPizzaSize() {
+
+		// Get references to the radioButton widgets
+		RadioButton radSmall = (RadioButton)findViewById(R.id.radSmall);
+		RadioButton radMedium = (RadioButton)findViewById(R.id.radMedium);
+
+		if (radSmall.isChecked()) {
+			return Size.SMALL;
+		}
+		else if (radMedium.isChecked()) {
+			return Size.MEDIUM;
+		}
+		else {
+			return Size.LARGE;
+		}
+
+	}
+
 	// Updates the price of the pizza toppings based on currently selected pizza size
 	public void updateToppingPrices() {
 		// The base price for the toppings
@@ -57,22 +77,20 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 		double sausagePrice = 1.75;
 		double baconPrice = 1.25;
 		double greenPepperPrice = 1;
-
-		// Get references to the radioButton widgets
-		RadioButton radSmall = (RadioButton)findViewById(R.id.radSmall);
-		RadioButton radMedium = (RadioButton)findViewById(R.id.radMedium);
-		RadioButton radLarge = (RadioButton)findViewById(R.id.radLarge);
-
+		
+		// Get the size of the pizza
+		Size pizzaSize = getPizzaSize();
+		
 		// If pizza is medium or large, we increase price of toppings
 		// If pizza is small, we use the base price
-		if (radMedium.isChecked()) {
+		if (pizzaSize == Size.MEDIUM) {
 			cheesePrice += 0.25;
 			pepperoniPrice += 0.25;
 			sausagePrice += 0.25;
 			baconPrice += 0.25;
 			greenPepperPrice += 0.25;
 		}
-		else if (radLarge.isChecked()) {
+		else if (pizzaSize == Size.LARGE) {
 			cheesePrice += 0.5;
 			pepperoniPrice += 0.5;
 			sausagePrice += 0.5;
