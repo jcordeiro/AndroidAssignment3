@@ -223,15 +223,15 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 		//				chkCheese.setText(String.format("%s%.2f", chkCheese.getText().toString(), cheesePrice));
 
 		chkCheese.setText(String.format("%s $%.2f",
-				getResources().getText(R.string.topping_cheese), cheesePrice));
+				getResources().getString(R.string.topping_cheese), cheesePrice));
 		chkPepperoni.setText(String.format("%s $%.2f",
-				getResources().getText(R.string.topping_pepperoni), pepperoniPrice));
+				getResources().getString(R.string.topping_pepperoni), pepperoniPrice));
 		chkBacon.setText(String.format("%s $%.2f",
-				getResources().getText(R.string.topping_bacon), baconPrice));
+				getResources().getString(R.string.topping_bacon), baconPrice));
 		chkSausage.setText(String.format("%s $%.2f",
-				getResources().getText(R.string.topping_sausage), sausagePrice));
+				getResources().getString(R.string.topping_sausage), sausagePrice));
 		chkPepper.setText(String.format("%s $%.2f",
-				getResources().getText(R.string.topping_green_pepper), greenPepperPrice));
+				getResources().getString(R.string.topping_green_pepper), greenPepperPrice));
 	}
 
 	@Override
