@@ -36,7 +36,7 @@
         android:orientation="vertical" >
 
         <RadioButton
-            android:id="@+id/radSmall"
+            android:id="@+id/radCash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -44,7 +44,7 @@
             android:text="@string/cash" />
 
         <RadioButton
-            android:id="@+id/radMedium"
+            android:id="@+id/radCreditCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

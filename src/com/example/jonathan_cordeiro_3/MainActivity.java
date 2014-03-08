@@ -15,7 +15,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
-// TODO: Finish activity_payment layout
 // TODO: Add onActivityResult callback
 
 
@@ -23,6 +22,7 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 
 	private static final int PAYMENT_ACTIVITY = 0;
 	private static final double HST = 1.13;
+	public static final String PIZZA = "pizza";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 
 		Pizza pizza = new Pizza(pizzaPrice, pizzaToppings, pizzaSize);
 		Intent intent = new Intent(MainActivity.this, PaymentActivity.class);
-		intent.putExtra("pizza", pizza);
+		intent.putExtra(PIZZA, pizza);
 
 		// Start the payment activity
 		startActivityForResult(intent, PAYMENT_ACTIVITY);
