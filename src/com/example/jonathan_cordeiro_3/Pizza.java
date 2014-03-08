@@ -7,7 +7,6 @@ import android.os.Parcelable;
 
 public class Pizza implements Parcelable {
 
-//	private double price;
 	private ArrayList<String> toppings;
 	private Size size;
 
@@ -18,22 +17,11 @@ public class Pizza implements Parcelable {
 	}
 
 	// Constructor
-//	public Pizza(double price, ArrayList<String> toppings, Size size) {
 	public Pizza(ArrayList<String> toppings, Size size) {
 
-//		this.price = price;
 		this.toppings = toppings;
 		this.size = size;
 	}
-
-	// Getter and setter methods
-//	public double getPrice() {
-//		return price;
-//	}
-//
-//	public void setPrice(double price) {
-//		this.price = price;
-//	}
 
 	public ArrayList<String> getToppings() {
 		return toppings;
@@ -59,7 +47,6 @@ public class Pizza implements Parcelable {
 	// Writes data to parcel
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-//		dest.writeDouble(price);
 		dest.writeSerializable(toppings);
 		dest.writeSerializable(size);
 	}
@@ -67,7 +54,6 @@ public class Pizza implements Parcelable {
 	// Constructor that reads values from a Parcel
 	@SuppressWarnings("unchecked")
 	public Pizza(Parcel in){
-//		this.price = in.readDouble();
 		this.toppings = (ArrayList<String>) in.readSerializable();
 		this.size = (Size) in.readSerializable();
 	}

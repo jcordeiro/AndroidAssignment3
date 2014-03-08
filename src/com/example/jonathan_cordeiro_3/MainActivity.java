@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -18,13 +17,9 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
-// TODO: Add onActivityResult callback
-
-
 public class MainActivity extends Activity implements OnCheckedChangeListener {
 
 	private static final int PAYMENT_ACTIVITY = 0;
-	private static final double HST = 1.13;
 	public static final String PIZZA = "pizza";
 
 	@Override
@@ -51,8 +46,8 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 	public void onPayment(View view) {
 		ArrayList<String> pizzaToppings = getPizzaToppings();
 		Size pizzaSize = getPizzaSize();
-//		double toppingPrice = getToppingPrice(pizzaSize, pizzaToppings);
-//		double pizzaPrice = calculateTotalPizzaPrice(pizzaSize, toppingPrice);
+		//		double toppingPrice = getToppingPrice(pizzaSize, pizzaToppings);
+		//		double pizzaPrice = calculateTotalPizzaPrice(pizzaSize, toppingPrice);
 
 		Pizza pizza = new Pizza(pizzaToppings, pizzaSize);
 		Intent intent = new Intent(MainActivity.this, PaymentActivity.class);
@@ -101,106 +96,23 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 		checkboxes.add(chkBacon);
 		checkboxes.add(chkSausage);
 		checkboxes.add(chkPepper);
-		
+
 		// Iterate through the checkboxes and if they're checked
 		// add that topping to the ArrayList of toppings
 		for (CheckBox cb : checkboxes) {
 			if (cb.isChecked()) {
-				
+
 				// We don't get the last 4 characters because we need to chop off the dollar amount
 				// from the string representing the topping
 				String topping = cb.getText().toString();
 				topping = topping.substring(0, cb.length() - 6);
-				
+
 				pizzaToppings.add(topping);
 			}
 		}
 
 		return pizzaToppings;
-
-
 	}
-	
-	/*
-
-	// Get the price of all the toppings currently on the pizza
-	public double getToppingPrice(Size size, ArrayList<String> toppings) {
-
-		double toppingPrice = 0;
-		
-		for (String s: toppings) {
-			Log.i("TOPPINGS", s);
-		}
-
-		// The base price for the toppings
-		double cheesePrice = 1;
-		double pepperoniPrice = 1.5;
-		double sausagePrice = 1.75;
-		double baconPrice = 1.25;
-		double greenPepperPrice = 1;
-
-		// If pizza is medium or large, we increase price of toppings
-		// If pizza is small, we use the base prices
-		if (size == Size.MEDIUM) {
-			cheesePrice += 0.25;
-			pepperoniPrice += 0.25;
-			sausagePrice += 0.25;
-			baconPrice += 0.25;
-			greenPepperPrice += 0.25;
-		}
-		else if (size == Size.LARGE) {
-			cheesePrice += 0.5;
-			pepperoniPrice += 0.5;
-			sausagePrice += 0.5;
-			baconPrice += 0.5;
-			greenPepperPrice += 0.5;
-		}
-
-		// Check which toppings are on the pizza an incremement the price
-		if (toppings.contains("Cheese")) {
-			toppingPrice = toppingPrice + cheesePrice;
-		}
-		if (toppings.contains("Pepperoni")) {
-			toppingPrice = toppingPrice + pepperoniPrice;
-		}
-		if (toppings.contains("Sausage")) {
-			toppingPrice = toppingPrice + sausagePrice;
-		}
-		if (toppings.contains("Bacon")) {
-			toppingPrice = toppingPrice + baconPrice;
-		}
-		if (toppings.contains("Green Pepper")) {
-			toppingPrice = toppingPrice + greenPepperPrice;
-		}
-
-		Log.i("TOPPINGS", "TOPPING PRICE: " + toppingPrice);
-		
-		return toppingPrice;
-
-	}
-
-	// Calculates the total price of the pizza
-	public double calculateTotalPizzaPrice(Size size, double toppingPrice) {
-
-		double price;
-
-		if (size == Size.SMALL) {
-			price = 8;
-		}
-		else if (size == Size.MEDIUM) {
-			price = 10;
-		}
-		else {
-			// LARGE
-			price = 12;
-		}
-
-		price = price + toppingPrice;
-		price = price * HST;
-		return price;
-
-	}
-	*/
 
 	// Updates the prices displayed for the pizza toppings based on currently selected pizza size
 	public void updateToppingPrices() {
@@ -239,8 +151,6 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 		CheckBox chkPepper = (CheckBox)findViewById(R.id.chkPepper);
 
 		// Display the appropriate price for the toppings
-		//				chkCheese.setText(String.format("%s%.2f", chkCheese.getText().toString(), cheesePrice));
-
 		chkCheese.setText(String.format("%s $%.2f",
 				getResources().getString(R.string.topping_cheese), cheesePrice));
 		chkPepperoni.setText(String.format("%s $%.2f",
@@ -262,30 +172,41 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		
+
 		// Get references to the UI widgets we need to update
 		Button btnPayment = (Button)findViewById(R.id.btnPayment);
 		TextView txtPaymentStatus = (TextView)findViewById(R.id.txtPaymentStatus);
-		
-		
+		TextView txtPaymentResult = (TextView)findViewById(R.id.txtPaymentResult);
+
 		// If their payment was successful
 		if (resultCode == RESULT_OK) {
-			
+
+			// Get the total price from the PaymentActivity
+			double totalPrice = data.getDoubleExtra(PaymentActivity.ORDER_TOTAL, 0);
+
 			txtPaymentStatus.setText(getResources().getString(R.string.payment_accepted));
 			txtPaymentStatus.setTextColor(Color.BLACK);
+
+			String totalIs = String.format("%s %.2f %s", 
+					getResources().getString(R.string.total_is), totalPrice, getResources().getString(R.string.inc_HST));
+
+			txtPaymentResult.setText(totalIs);
+			txtPaymentResult.setVisibility(View.VISIBLE);
+
 			btnPayment.setText(getResources().getString(R.string.new_order));
-			
+
 		}
 		else {
 			// Payment failed
-			
+
 			txtPaymentStatus.setText(getResources().getString(R.string.payment_not_accepted));
 			txtPaymentStatus.setTextColor(Color.RED);
 			btnPayment.setText(getResources().getString(R.string.payment));
-			
+			txtPaymentResult.setVisibility(View.INVISIBLE);
+
 		}
-		
-		
+
+
 	}
 
 }
