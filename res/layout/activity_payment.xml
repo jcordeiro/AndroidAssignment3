@@ -20,13 +20,14 @@
         android:id="@+id/txtPizzaTopings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:layout_marginLeft="8dp" />
+        android:layout_marginLeft="8dp"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/txtTotalPrice"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="22sp" />
 
     <RadioGroup
         android:id="@+id/grpPayment"
@@ -49,11 +50,12 @@
             android:layout_weight="1"
             android:text="@string/credit_card" />
     </RadioGroup>
-    
+
     <Button
         android:id="@+id/btnPayNow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="OnPayNow" />
+        android:onClick="OnPayNow"
+        android:text="@string/pay_now" />
 
 </LinearLayout>

@@ -22,8 +22,11 @@ public class PaymentActivity extends Activity {
 
 		displayPizzaToppings(pizza);
 		displayPizzaSize(pizza);
+		displayPizzaPrice(pizza);
 
 	}
+
+
 
 	public void displayPizzaToppings(Pizza pizza) {
 
@@ -44,6 +47,7 @@ public class PaymentActivity extends Activity {
 
 
 
+
 	}
 
 	public void displayPizzaSize(Pizza pizza) {
@@ -53,7 +57,6 @@ public class PaymentActivity extends Activity {
 
 		if (pizzaSize == Size.SMALL) {
 			size = getResources().getString(R.string.small_size);
-
 		}
 		else if (pizzaSize == Size.MEDIUM) {
 			size = getResources().getString(R.string.medium_size);
@@ -61,11 +64,23 @@ public class PaymentActivity extends Activity {
 		else {
 			size = getResources().getString(R.string.large_size);
 		}
-		
-		
+
 		// Get a reference the the pizza size textview widget
 		TextView txtPizzaWith = (TextView)findViewById(R.id.txtPizzaWith);
 		txtPizzaWith.setText(size + " " + getResources().getString(R.string.pizza_with));
+	}
+
+	private void displayPizzaPrice(Pizza pizza) {
+		
+		// Get a reference to the total price textview widget
+		TextView txtTotalPrice = (TextView)findViewById(R.id.txtTotalPrice);
+		
+		// Add the price of the pizza to the string resource
+		String price = String.format("%s%.2f", getResources().getString(R.string.total_price), pizza.getPrice());
+
+		// Display the total price of the pizza to the user
+		txtTotalPrice.setText(price);
+
 	}
 
 
