@@ -39,7 +39,8 @@ public class PaymentActivity extends Activity {
 		// We don't get the last 4 characters because we need to chop off the dollar amount
 		// from the string representing the topping
 		for (String topping : pizza.getToppings()) {
-			toppings.append(topping.substring(0, topping.length() - 5) + "\n");
+//			toppings.append(topping.substring(0, topping.length() - 5) + "\n");
+			toppings.append(topping + "\n");
 		}
 
 		// Diplay the pizza toppings to the user

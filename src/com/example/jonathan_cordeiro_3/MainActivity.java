@@ -7,6 +7,7 @@ import com.example.jonathan_cordeiro_3.Pizza.Size;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
@@ -97,12 +98,18 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 		checkboxes.add(chkBacon);
 		checkboxes.add(chkSausage);
 		checkboxes.add(chkPepper);
-
+		
 		// Iterate through the checkboxes and if they're checked
 		// add that topping to the ArrayList of toppings
 		for (CheckBox cb : checkboxes) {
 			if (cb.isChecked()) {
-				pizzaToppings.add(cb.getText().toString());
+				
+				// We don't get the last 4 characters because we need to chop off the dollar amount
+				// from the string representing the topping
+				String topping = cb.getText().toString();
+				topping = topping.substring(0, cb.length() - 6);
+				
+				pizzaToppings.add(topping);
 			}
 		}
 
@@ -115,6 +122,10 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 	public double getToppingPrice(Size size, ArrayList<String> toppings) {
 
 		double toppingPrice = 0;
+		
+		for (String s: toppings) {
+			Log.i("TOPPINGS", s);
+		}
 
 		// The base price for the toppings
 		double cheesePrice = 1;
@@ -144,19 +155,21 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 		if (toppings.contains("Cheese")) {
 			toppingPrice = toppingPrice + cheesePrice;
 		}
-		else if (toppings.contains("Pepperoni")) {
+		if (toppings.contains("Pepperoni")) {
 			toppingPrice = toppingPrice + pepperoniPrice;
 		}
-		else if (toppings.contains("Sausage")) {
+		if (toppings.contains("Sausage")) {
 			toppingPrice = toppingPrice + sausagePrice;
 		}
-		else if (toppings.contains("Bacon")) {
+		if (toppings.contains("Bacon")) {
 			toppingPrice = toppingPrice + baconPrice;
 		}
-		else if (toppings.contains("Green Pepper")) {
+		if (toppings.contains("Green Pepper")) {
 			toppingPrice = toppingPrice + greenPepperPrice;
 		}
 
+		Log.i("TOPPINGS", "TOPPING PRICE: " + toppingPrice);
+		
 		return toppingPrice;
 
 	}
