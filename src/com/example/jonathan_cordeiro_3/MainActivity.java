@@ -7,13 +7,16 @@ import com.example.jonathan_cordeiro_3.Pizza.Size;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.TextView;
 
 // TODO: Add onActivityResult callback
 
@@ -48,10 +51,10 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 	public void onPayment(View view) {
 		ArrayList<String> pizzaToppings = getPizzaToppings();
 		Size pizzaSize = getPizzaSize();
-		double toppingPrice = getToppingPrice(pizzaSize, pizzaToppings);
-		double pizzaPrice = calculateTotalPizzaPrice(pizzaSize, toppingPrice);
+//		double toppingPrice = getToppingPrice(pizzaSize, pizzaToppings);
+//		double pizzaPrice = calculateTotalPizzaPrice(pizzaSize, toppingPrice);
 
-		Pizza pizza = new Pizza(pizzaPrice, pizzaToppings, pizzaSize);
+		Pizza pizza = new Pizza(pizzaToppings, pizzaSize);
 		Intent intent = new Intent(MainActivity.this, PaymentActivity.class);
 		intent.putExtra(PIZZA, pizza);
 
@@ -117,6 +120,8 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 
 
 	}
+	
+	/*
 
 	// Get the price of all the toppings currently on the pizza
 	public double getToppingPrice(Size size, ArrayList<String> toppings) {
@@ -195,6 +200,7 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 		return price;
 
 	}
+	*/
 
 	// Updates the prices displayed for the pizza toppings based on currently selected pizza size
 	public void updateToppingPrices() {
@@ -250,6 +256,36 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 		updateToppingPrices();
+	}
+
+	// Runs when the user returns from PaymentActivity by pressing the Pay Now button
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		// Get references to the UI widgets we need to update
+		Button btnPayment = (Button)findViewById(R.id.btnPayment);
+		TextView txtPaymentStatus = (TextView)findViewById(R.id.txtPaymentStatus);
+		
+		
+		// If their payment was successful
+		if (resultCode == RESULT_OK) {
+			
+			txtPaymentStatus.setText(getResources().getString(R.string.payment_accepted));
+			txtPaymentStatus.setTextColor(Color.BLACK);
+			btnPayment.setText(getResources().getString(R.string.new_order));
+			
+		}
+		else {
+			// Payment failed
+			
+			txtPaymentStatus.setText(getResources().getString(R.string.payment_not_accepted));
+			txtPaymentStatus.setTextColor(Color.RED);
+			btnPayment.setText(getResources().getString(R.string.payment));
+			
+		}
+		
+		
 	}
 
 }
