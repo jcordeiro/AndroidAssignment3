@@ -187,7 +187,7 @@ public class MainActivity extends Activity implements OnCheckedChangeListener {
 			txtPaymentStatus.setText(getResources().getString(R.string.payment_accepted));
 			txtPaymentStatus.setTextColor(Color.BLACK);
 
-			String totalIs = String.format("%s %.2f %s", 
+			String totalIs = String.format("%s%.2f %s", 
 					getResources().getString(R.string.total_is), totalPrice, getResources().getString(R.string.inc_HST));
 
 			txtPaymentResult.setText(totalIs);
